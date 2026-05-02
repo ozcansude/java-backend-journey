@@ -28,6 +28,10 @@ Normal arraylerden farklı olarak eleman ekledikçe boyutu otomatik olarak büy�
 - Ortadan eleman silme işlemi maliyetli olabilir.
 
 örneğin: 
+
+
+
+
 import java.util.ArrayList;
 
 public class ArrayListBasics {
