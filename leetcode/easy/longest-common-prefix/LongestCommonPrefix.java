@@ -1,4 +1,4 @@
-class Solution {
+class LongestCommonPrefix {
     public String longestCommonPrefix(String[] strs) { //["flower", "flow",flight"]
         if(strs == null || strs.length == 0)
             return "";

@@ -1,5 +1,5 @@
 import java.util.Stack;
-class Solution {
+class ValidParantheses {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         if(s.length() % 2 != 0) 

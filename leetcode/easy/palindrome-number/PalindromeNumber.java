@@ -1,4 +1,4 @@
-class Palindrome {
+class PalindromeNumber {
     public boolean isPalindrome(int x) {
 
         boolean isBoolean = true;

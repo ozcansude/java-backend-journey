@@ -1,4 +1,4 @@
-# Palindrome Number
+# PalindromeNumber Number
 
 ## Goal
 
