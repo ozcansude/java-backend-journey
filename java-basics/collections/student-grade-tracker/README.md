@@ -12,19 +12,25 @@ PROJE ÖZELLİKLERİ
 
 
 Stream API İçerisinde Kullandıklarım
+
 1. stream()
+
 students.stream()
 
 Öğrenci listesini stream yapısına çevirerek işlemler yapmamı sağlar.
--
+
+
+
 2. filter()
+
 .filter(student -> student.getGrade() >= 70)
 
 Not ortalaması 70 ve üzeri olan öğrencileri seçer.
 
 Yani başarısız öğrenciler listeden çıkarılır.
--
+
 3. sorted()
+ 
 .sorted(
     Comparator.comparing(Student::getGrade).reversed()
     .thenComparing(Student::getDepartment)
@@ -34,12 +40,15 @@ Yani başarısız öğrenciler listeden çıkarılır.
 
 Sıralama Mantığı:
 Önce not ortalamasına göre (büyükten küçüğe)
-Eğer ortalama eşitse bölüm adına göre alfabetik sıralama
+Eğer ortalama eşitse bölüm adına göre alfabetik sıralama(thenComparing())
 
 4. collect()
+ 
 .collect(Collectors.toList())
 
 Stream sonucu oluşan veriyi tekrar List haline getirir.
+
+
 --------------------------------------------------------------------------------------------------------------------
 🔺 Neden Math.min(3, regulatedList.size()) Kullandım?
 for(int i = 0; i < Math.min(3, regulatedList.size()); i++)
