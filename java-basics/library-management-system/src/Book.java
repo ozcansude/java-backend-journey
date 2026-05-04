@@ -6,11 +6,11 @@ public class Book {
     private boolean available;
 
     public Book(int id, String title, String author, String category, boolean available){
-        this.setTitle(title);
-        this.setAuthor(author);
-        this.setAvailable(available);
-        this.setId(id);
-        this.setCategory(category);
+        this.title = title;
+        this.author = author;
+        this.available = available;
+        this.id = id;
+        this.category = category;
     }
 
 
