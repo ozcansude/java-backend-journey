@@ -55,8 +55,9 @@ public class Book {
     }
 
     public String toString(){
-
-        return "";
+        return "Kitap Adı: " +getTitle()
+                +"\nYazar: "+getAuthor()
+                +"\nKitap id : "+getId();
     }
 
 
