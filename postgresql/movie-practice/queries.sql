@@ -11,7 +11,7 @@ WHERE director LIKE
 
 SELECT *
 FROM movies
-ORDER BY year ASC;
+ORDER BY year;
 
 SELECT *
 FROM movies
