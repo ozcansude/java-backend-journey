@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# DataGrip / JetBrains
+.idea/
+*.iml
+
+# Temp
+*.tmp
