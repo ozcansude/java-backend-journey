@@ -183,7 +183,7 @@ WHERE is_active;
     SELECT e.first_name || ' ' || e.last_name AS employee_name
     FROM employees e
         LEFT JOIN employee_projects ep ON e.id = ep.employee_id
-    HAVING ep.employee_id IS NULL;
+    WHERE ep.employee_id IS NULL;
 
 -- 30.
     SELECT p.name AS project_name, COUNT(ep.employee_id) AS employee_count
