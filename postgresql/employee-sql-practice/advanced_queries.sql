@@ -252,6 +252,14 @@ FROM employees e
 WHERE EXTRACT(YEAR FROM AGE(CURRENT_DATE, e.hire_date))<= 2
 ORDER BY working_for_years;
 
+-- 24.Projelerin kaç gündür sürdüğünü hesapla.
+SELECT
+    p.name,
+    p.start_date,
+    p.end_date,
+    COALESCE(p.end_date, current_date) - start_date AS project_duration_days
+FROM projects p
+ORDER BY project_duration_days;
 
 
 
