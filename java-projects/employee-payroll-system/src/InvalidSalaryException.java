@@ -1,5 +1,7 @@
-public class InvalidSalaryExceptio extends Exception{
+public class InvalidSalaryException extends Exception{
     //Negatif maaş, negatif saat, negatif bonus gibi durumlarda fırlatılacak.
-    public 
+    public InvalidSalaryException(String message){
+        super(message);
+    }
 
 }

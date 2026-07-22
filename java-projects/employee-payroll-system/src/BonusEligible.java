@@ -1,2 +1,4 @@
-public class BonusEligible {
+public interface BonusEligible {
+    double calculateBonus();
+
 }
