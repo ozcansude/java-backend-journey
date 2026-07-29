@@ -21,7 +21,7 @@ public class MapComparison {
         hashMap.put("Python",70);
         hashMap.put("AI",50);
 
-        hashMap.put("AI",55); // key unique'tir. tekrarlanırrsa value güncellenir.
+        hashMap.put("AI",55); // key unique'tir. tekrarlanırsa value güncellenir.
 
         System.out.println(hashMap);
 
@@ -37,7 +37,7 @@ public class MapComparison {
 
         System.out.println(hashMap);
 
-        //System.out.println(hashMap.remove("Python")); // bu silinen value'yü (60) döndürür
+        //System.out.println(hashMap.remove("Python")); // bu silinen value'yü (70) döndürür
 
         System.out.println("EntrySet ile dolaşma : ");
         for(Map.Entry<String, Integer> entry : hashMap.entrySet()){
@@ -78,7 +78,7 @@ public class MapComparison {
         System.out.println(linked.get("Docker"));
 
         System.out.println("AI listede var mı? : "+ linked.containsKey("AI")); // AI listede var mı
-        System.out.println("C# listede var mı? : "+ linked.containsKey("C#")); // AI listede var mı
+        System.out.println("C# listede var mı? : "+ linked.containsKey("C#")); // C# listede var mı
 
         System.out.println(linked.containsValue(65));
 

@@ -8,12 +8,11 @@ public class IsDuplicate {
 
         isDuplicate(names);
     }
-
+    // time complexity : O(n), space complexity : O(n)
     public static boolean isDuplicate(String[] arr){
         HashSet<String> set = new HashSet<>();
         for(String a : arr){
             if(!set.add(a)){
-                System.out.println(a+ " is duplicated!");
                 return true;
             }
         }
