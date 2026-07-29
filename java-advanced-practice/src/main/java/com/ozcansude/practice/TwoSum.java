@@ -19,7 +19,9 @@ Genellikle sonuç olarak sayıların kendisi değil, dizideki konumları döndü
 
 0 ve 1
 */
+
 public class TwoSum {
+
     public static void bruteForce(int[] array, int target) {
         for(int i=0; i<array.length; i++){ // İç içe iki döngü olduğundan timw comlexity O(n^2)'dir.
             for(int j = i+1; j<array.length; j++){
