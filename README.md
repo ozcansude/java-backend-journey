@@ -1,6 +1,6 @@
 # Java Backend Journey
 
-This repository contains my Java, Spring Boot, PostgreSQL and algorithm practice during my backend learning journey.
+This repository contains my Java, Spring Boot, PostgreSQL and algorithm exceptionpractice during my backend learning journey.
 
 ## Contents
 
@@ -20,7 +20,7 @@ Current topics:
 
 ### Spring Boot
 
-Backend development practice with Spring Boot.
+Backend development exceptionpractice with Spring Boot.
 
 Planned topics:
 

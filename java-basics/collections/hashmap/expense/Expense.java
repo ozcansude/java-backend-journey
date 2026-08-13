@@ -3,10 +3,12 @@ package hashmap.expense;
 public class Expense {
     private String category;
     private int amount;
+    private int id;
 
-    Expense(String category, int amount){
+    Expense(int id,String category, int amount){
         this.category = category;
         this.amount = amount;
+        this.id = id;
     }
 
     public String getCategory() {
@@ -26,6 +28,14 @@ public class Expense {
     }
 
     public String toString(){
-        return  getCategory() + "  ---  "+getAmount() ;
+        return  +getId()+"---"+ getCategory() + "---"+getAmount() ;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
