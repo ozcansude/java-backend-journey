@@ -5,6 +5,9 @@ import java.util.Deque;
 
 // {}[]() , ({[]}) LŞEKLİNDE İFADELER
 public class ValidParentheses {
+    public static void main(String[] args){
+        System.out.println(isValid("{()}[]"));
+    }
     public static boolean isValid(String text) {
         Deque<Character> deque = new ArrayDeque<>();
         for(char c: text.toCharArray()){
