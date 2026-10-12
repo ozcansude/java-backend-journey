@@ -18,7 +18,6 @@ public class Main {
     //    System.out.println(GenericMaxFinder.findMax(bos));          // IllegalArgumentException
         System.out.println(list1);                                  // null
 
-
         Urun[] urunler = {
                 new Urun("Laptop", 35000),
                 new Urun("Telefon", 25000),
@@ -27,8 +26,6 @@ public class Main {
                 };
 
         System.out.println(GenericMaxFinder.findMax(urunler));
-
-
 
     }
 }
