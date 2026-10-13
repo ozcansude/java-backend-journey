@@ -4,6 +4,10 @@ import hashmap.expense.exception.ExpenseNotFoundException;
 import hashmap.expense.exception.InvalidCategoryException;
 import hashmap.expense.exception.InvalidExpenseAmountException;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +97,42 @@ public class ExpenseService {
 
         public List<Expense> getAllExpenses(){
             return expenseRepository.findAll();
+        }
+
+        public List<Expense> findExpensesAboveAmount(int amount){
+            List<Expense> expenseList = new ArrayList<>();
+            Predicate<Expense> predicate = expense -> expense.getAmount() > amount ;
+            for(Expense expense : getAllExpenses()){
+                if(predicate.test(expense)){
+                    expenseList.add(expense);
+                }
+            }
+            return expenseList;
+        }
+        public List<Expense> findExpensesByCategory(String category){
+            List<Expense> expenseList = new ArrayList<>();
+            Predicate<Expense> control = expense -> expense.getCategory().equals(category);
+
+            for (Expense expense : getAllExpenses()){
+                if(control.test(expense)){
+                    expenseList.add(expense);
+                }
+            }
+            return expenseList;
+        }
+        public List<String> getExpenseNames(){
+            List<String> liste = new ArrayList<>();
+            Function<Expense, String> donustur = expense -> expense.getCategory().toUpperCase();
+            for(Expense expense : getAllExpenses()){
+                liste.add(donustur.apply(expense));
+            }
+            return liste;
+        }
+        public void printAllExpenses(){
+            Consumer<Expense> islem = expense -> System.out.println(expense);
+            for(Expense expense : getAllExpenses()){
+                islem.accept(expense);
+            }
         }
 
 }

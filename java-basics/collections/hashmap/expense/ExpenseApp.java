@@ -43,9 +43,9 @@ public class ExpenseApp {
 
 
         expenseService.removeExpense(4);
-        List<Expense> expenseList = expenseService.getAllExpenses();
+        List<Expense> expenseList1 = expenseService.getAllExpenses();
 
-        for(Expense expense : expenseList){
+        for(Expense expense : expenseList1){
             System.out.println(expense);
         }
  //// -------------------------
