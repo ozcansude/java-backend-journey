@@ -8,10 +8,9 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-
 import java.util.stream.Collectors;
 
-//1. ExpenseService içinde geçersiz tutar, bulunamayan harcama ve boş kategori durumlarında bu exception’ları fırlat.
+
 public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
@@ -74,40 +73,23 @@ public class ExpenseService {
             expenseRepository.update(id,expense);
         }
 
-        public Map<String, List<Expense>> groupByCategory(){
-            List<Expense> expenses= expenseRepository.findAll();
-            Map<String, List<Expense>> groupExpenses = new HashMap<>();
-
-            for(Expense expense : expenses){
-                String category = expense.getCategory();
-                if(!groupExpenses.containsKey(category)){
-                    List<Expense> categoryExpenses = new ArrayList<>();
-                    categoryExpenses.add(expense);
-                    groupExpenses.put(category,categoryExpenses);
-                }else{
-                    List<Expense> existingList = groupExpenses.get(category);
-                    existingList.add(expense);
-                }
-            }
-            return groupExpenses;
-
+         public Map<String, List<Expense>> getExpensesGroupedByCategory(){
+            List<Expense> expenseList = expenseRepository.findAll();
+            Map<String,List<Expense>> grouped= expenseList.stream()
+                .collect(Collectors.groupingBy(Expense::getCategory));
+            return grouped;
         }
-
         public List<Expense> getAllExpenses(){
             return expenseRepository.findAll();
         }
 
-        public List<Expense> findExpensesAboveAmount(int amount) {
-            List<Expense> expenseList = new ArrayList<>();
-            Predicate<Expense> predicate = expense -> expense.getAmount() > amount;
-            for (Expense expense : getAllExpenses()) {
-                if (predicate.test(expense)) {
-                    expenseList.add(expense);
-                }
-            }
-            return expenseList;
+        public List<Expense> getExpensesAboveAmount(int amount){
+            List<Expense> expenseList = expenseRepository.findAll();
+            List<Expense> expenses= expenseList.stream()
+                .filter(e-> e.getAmount()> amount)
+                .collect(Collectors.toList());
+            return expenses;
         }
-
         public List<Expense> findExpensesByCategory(String category){
             List<Expense> expenseList = new ArrayList<>();
             Predicate<Expense> control = expense -> expense.getCategory().equals(category);
@@ -119,7 +101,9 @@ public class ExpenseService {
             }
             return expenseList;
         }
-        public List<String> getExpenseNames(){
+
+
+        public List<String> getUppercaseCategories(){
             List<String> liste = new ArrayList<>();
             Function<Expense, String> donustur = expense -> expense.getCategory().toUpperCase();
             for(Expense expense : getAllExpenses()){
@@ -134,19 +118,12 @@ public class ExpenseService {
             }
         }
 
-        public List<Expense> getExpensesAbove500(){
-            List<Expense> expenseList = expenseRepository.findAll();
-            List<Expense> expenses= expenseList.stream()
-                     .filter(e-> e.getAmount()>500)
-                     .collect(Collectors.toList());
-            return expenses;
-        }
 
     public List<Expense> getExpensesSortedByAmount() {
         List<Expense> expenses = expenseRepository.findAll();
 
         return expenses.stream()
-                .sorted(Comparator.comparingDouble(Expense::getAmount).reversed())
+                .sorted(Comparator.comparingInt(Expense::getAmount).reversed())
                 .collect(Collectors.toList());
     }
     public double getTotalExpenseAmount() {
@@ -163,13 +140,8 @@ public class ExpenseService {
                 .max(Comparator.comparingInt(Expense::getAmount));
             return mostExpensiveOptional;
         }
-        public Map<String, List<Expense>> getExpensesGroupedByCategory(){
-            List<Expense> expenseList = expenseRepository.findAll();
-            Map<String,List<Expense>> grouped= expenseList.stream()
-                    .collect(Collectors.groupingBy(Expense::getCategory));
-            return grouped;
-        }
-    public Map<String, Integer> getPriceGroupedByCategory(){
+
+    public Map<String, Integer> getTotalAmountByCategory(){
         List<Expense> expenseList = expenseRepository.findAll();
         Map<String,Integer> grouped= expenseList.stream()
                 .collect(Collectors.groupingBy(Expense::getCategory,Collectors.summingInt(Expense::getAmount)));

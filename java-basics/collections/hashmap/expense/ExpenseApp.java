@@ -4,9 +4,8 @@ import hashmap.expense.exception.ExpenseNotFoundException;
 import hashmap.expense.exception.InvalidCategoryException;
 import hashmap.expense.exception.InvalidExpenseAmountException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 
 public class ExpenseApp {
@@ -50,7 +49,7 @@ public class ExpenseApp {
         }
  //// -------------------------
 
-        System.out.println(expenseService.groupByCategory());
+        System.out.println(expenseService.getExpensesGroupedByCategory());
 
 
         Expense e6 = new Expense(6,"Ulaşım",-500);
@@ -79,8 +78,8 @@ public class ExpenseApp {
 
         System.out.println("\n--- STREAM API TESTS ---");
 
-        System.out.println("Expenses above 500:");
-        expenseService.getExpensesAbove500()
+        System.out.println("Expenses above amount:");
+        expenseService.getExpensesAboveAmount(150)
                 .forEach(System.out::println);
 
         System.out.println("\nSorted expenses:");
@@ -106,12 +105,10 @@ public class ExpenseApp {
                 });
 
         System.out.println("\nTotal amount by category:");
-        expenseService.getPriceGroupedByCategory()
+        expenseService.getTotalAmountByCategory()
                 .forEach((category, total) ->
                         System.out.println(category + ": " + total)
                 );
-
-
 
     }
 }
