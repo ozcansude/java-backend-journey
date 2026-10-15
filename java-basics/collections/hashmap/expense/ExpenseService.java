@@ -4,14 +4,12 @@ import hashmap.expense.exception.ExpenseNotFoundException;
 import hashmap.expense.exception.InvalidCategoryException;
 import hashmap.expense.exception.InvalidExpenseAmountException;
 
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 //1. ExpenseService içinde geçersiz tutar, bulunamayan harcama ve boş kategori durumlarında bu exception’ları fırlat.
 public class ExpenseService {
@@ -99,16 +97,17 @@ public class ExpenseService {
             return expenseRepository.findAll();
         }
 
-        public List<Expense> findExpensesAboveAmount(int amount){
+        public List<Expense> findExpensesAboveAmount(int amount) {
             List<Expense> expenseList = new ArrayList<>();
-            Predicate<Expense> predicate = expense -> expense.getAmount() > amount ;
-            for(Expense expense : getAllExpenses()){
-                if(predicate.test(expense)){
+            Predicate<Expense> predicate = expense -> expense.getAmount() > amount;
+            for (Expense expense : getAllExpenses()) {
+                if (predicate.test(expense)) {
                     expenseList.add(expense);
                 }
             }
             return expenseList;
         }
+
         public List<Expense> findExpensesByCategory(String category){
             List<Expense> expenseList = new ArrayList<>();
             Predicate<Expense> control = expense -> expense.getCategory().equals(category);
@@ -134,5 +133,48 @@ public class ExpenseService {
                 islem.accept(expense);
             }
         }
+
+        public List<Expense> getExpensesAbove500(){
+            List<Expense> expenseList = expenseRepository.findAll();
+            List<Expense> expenses= expenseList.stream()
+                     .filter(e-> e.getAmount()>500)
+                     .collect(Collectors.toList());
+            return expenses;
+        }
+
+    public List<Expense> getExpensesSortedByAmount() {
+        List<Expense> expenses = expenseRepository.findAll();
+
+        return expenses.stream()
+                .sorted(Comparator.comparingDouble(Expense::getAmount).reversed())
+                .collect(Collectors.toList());
+    }
+    public double getTotalExpenseAmount() {
+        List<Expense> expenseList = expenseRepository.findAll();
+        double total = expenseList.stream()
+                .map(e -> (double)e.getAmount())
+                .reduce(0.0, (a,b) -> a + b);
+        return total;
+
+        }
+        public Optional<Expense> getMostExpensiveExpense() {
+            List<Expense> expenseList = expenseRepository.findAll();
+            Optional<Expense> mostExpensiveOptional = expenseList.stream()
+                .max(Comparator.comparingInt(Expense::getAmount));
+            return mostExpensiveOptional;
+        }
+        public Map<String, List<Expense>> getExpensesGroupedByCategory(){
+            List<Expense> expenseList = expenseRepository.findAll();
+            Map<String,List<Expense>> grouped= expenseList.stream()
+                    .collect(Collectors.groupingBy(Expense::getCategory));
+            return grouped;
+        }
+    public Map<String, Integer> getPriceGroupedByCategory(){
+        List<Expense> expenseList = expenseRepository.findAll();
+        Map<String,Integer> grouped= expenseList.stream()
+                .collect(Collectors.groupingBy(Expense::getCategory,Collectors.summingInt(Expense::getAmount)));
+        return grouped;
+    }
+
 
 }

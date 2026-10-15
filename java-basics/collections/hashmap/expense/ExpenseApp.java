@@ -51,7 +51,7 @@ public class ExpenseApp {
  //// -------------------------
 
         System.out.println(expenseService.groupByCategory());
-         // -------------------------
+
 
         Expense e6 = new Expense(6,"Ulaşım",-500);
         try{
@@ -67,11 +67,49 @@ public class ExpenseApp {
             System.out.println(e.getMessage());
         }
 
+        System.out.println("\nFind expense by id");
         try{
             expenseService.findExpenseById(99);
         }catch(ExpenseNotFoundException e){
             System.out.println(e.getMessage());
         }
+
+        System.out.println("Total Expenses : " + expenseService.getTotalExpenseAmount());
+
+
+        System.out.println("\n--- STREAM API TESTS ---");
+
+        System.out.println("Expenses above 500:");
+        expenseService.getExpensesAbove500()
+                .forEach(System.out::println);
+
+        System.out.println("\nSorted expenses:");
+        expenseService.getExpensesSortedByAmount()
+                .forEach(System.out::println);
+
+        System.out.println("\nTotal expense amount:");
+        System.out.println(expenseService.getTotalExpenseAmount());
+
+
+        System.out.println("\nMost expensive expense:");
+        expenseService.getMostExpensiveExpense()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("No expenses found")
+                );
+
+        System.out.println("\nExpenses grouped by category:");
+        expenseService.getExpensesGroupedByCategory()
+                .forEach((category, expenses) -> {
+                    System.out.println(category + ":");
+                    expenses.forEach(System.out::println);
+                });
+
+        System.out.println("\nTotal amount by category:");
+        expenseService.getPriceGroupedByCategory()
+                .forEach((category, total) ->
+                        System.out.println(category + ": " + total)
+                );
 
 
 
