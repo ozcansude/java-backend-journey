@@ -1,6 +1,6 @@
-package hashmap.expense;
+package com.ozcansude.practice.expense;
 
-import repository.InMemoryRepository;
+import com.ozcansude.practice.expense.repository.InMemoryRepository;
 
 
 import java.util.ArrayList;

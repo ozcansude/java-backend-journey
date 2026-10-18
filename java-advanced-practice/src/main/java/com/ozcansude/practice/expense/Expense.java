@@ -1,4 +1,4 @@
-package hashmap.expense;
+package com.ozcansude.practice.expense;
 
 public class Expense {
     private int id;

@@ -1,4 +1,4 @@
-package repository;
+package com.ozcansude.practice.expense.repository;
 
 import java.util.List;
 

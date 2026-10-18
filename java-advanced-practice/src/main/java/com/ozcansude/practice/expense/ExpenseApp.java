@@ -1,8 +1,8 @@
-package hashmap.expense;
+package com.ozcansude.practice.expense;
 
-import hashmap.expense.exception.ExpenseNotFoundException;
-import hashmap.expense.exception.InvalidCategoryException;
-import hashmap.expense.exception.InvalidExpenseAmountException;
+import com.ozcansude.practice.expense.exception.ExpenseNotFoundException;
+import com.ozcansude.practice.expense.exception.InvalidCategoryException;
+import com.ozcansude.practice.expense.exception.InvalidExpenseAmountException;
 
 import java.util.List;
 
