@@ -40,8 +40,8 @@ public class ExpenseService {
             if(!deleted){
                 throw new ExpenseNotFoundException("Expense not found!");
             }
-
         }
+
         public void updateExpense(int id, String newCategory, int newAmount){
             Expense expense = findExpenseById(id);
             if(newAmount <= 0){
