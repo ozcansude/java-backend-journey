@@ -1,6 +1,5 @@
 # 🎬 Film Lab — PostgreSQL Pratik Görevleri
 
-Önce `film_veritabani.sql` dosyasını çalıştır. Tüm tablolar `film_lab` şemasında. `SET search_path TO film_lab, public;` kullanabilirsin.
 
 **Veri yapısı:** 1.500 film, 900 kişi, 5.000 kullanıcı, 60.000 puan, 25.000 kiralama. Gerçek film başlıkları (ilk 20) hariç bütün örnek kayıtlar ve finansal değerler eğitim amacıyla sentetiktir.
 
@@ -18,7 +17,7 @@
 9. Oyuncu isimleri, karakterleri, film adları ve gösterim yıllarını getir.
 10. Yönetmen adı, film adı ve filmin ortalama kullanıcı puanını getir.
 11. Yönetmen başına çekilen film sayısını göster; 5'ten fazla filmi olanları bul.
-12. Hangi aktörlerin iki farklı türde en çok filme çıktığını bul (`COUNT(DISTINCT ...)`).
+12. En az iki farklı film türünde oynamış aktörleri bulup film sayılarına göre sıralamak. (`COUNT(DISTINCT ...)`).
 13. Hiç yorum yazmamış, ancak puan vermiş kullanıcıları bul.
 14. Puanlaması olmayan filmleri `LEFT JOIN` ile bul.
 15. Hem izleme listesine eklediği hem puan verdiği filmler bulunan kullanıcıları getir.
