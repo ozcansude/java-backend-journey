@@ -1,4 +1,4 @@
-package com.ozcansude.practice;
+package java.com.expense;
 
 public class Course {
     private int courseId;

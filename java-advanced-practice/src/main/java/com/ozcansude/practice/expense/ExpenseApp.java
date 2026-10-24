@@ -6,8 +6,6 @@ import com.ozcansude.practice.expense.exception.InvalidExpenseAmountException;
 
 import java.util.List;
 
-
-
 public class ExpenseApp {
     public static void main(String[] args){
 
@@ -33,7 +31,7 @@ public class ExpenseApp {
         for(Expense expense : expenseList){
             System.out.println(expense);
         }
- //// -------------------------
+        //// -------------------------
         System.out.println(expenseService.findExpenseById(3));
 
         expenseService.updateExpense(3,"Yemek",450);
@@ -47,7 +45,7 @@ public class ExpenseApp {
         for(Expense expense : expenseList1){
             System.out.println(expense);
         }
- //// -------------------------
+        //// -------------------------
 
         System.out.println(expenseService.getExpensesGroupedByCategory());
 

@@ -1,24 +1,7 @@
-package com.ozcansude.practice;
+package java.com.expense;
 
 import java.util.HashMap;
 
-/*
-Two Sum problemini önce iç içe döngüyle, sonra HashMap kullanarak çöz. İki çözümün zaman karmaşıklığını yorum satırında açıkla.
-bir sayı dizisi ve bir hedef toplam verilir. Dizideki hangi iki farklı elemanın toplamının hedefe eşit olduğunu bulursun.
-
-Örneğin:
-
-Dizi: [2, 7, 11, 15]
-Hedef: 9
-
-Burada aradığın ikili:
-
-2 + 7 = 9
-
-Genellikle sonuç olarak sayıların kendisi değil, dizideki konumları döndürülür:
-
-0 ve 1
-*/
 
 public class TwoSum {
 

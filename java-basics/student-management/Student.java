@@ -1,4 +1,4 @@
-package com.ozcansude.practice;
+package java.com.expense;
 
 import java.util.ArrayList;
 import java.util.List;
