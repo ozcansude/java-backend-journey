@@ -9,7 +9,7 @@ import java.util.List;
 public class ExpenseApp {
     public static void main(String[] args){
 
-        ExpenseRepository expenseRepository = new ExpenseRepository();
+        InMemoryExpenseRepository expenseRepository = new InMemoryExpenseRepository();
 
         ExpenseService expenseService = new ExpenseService(expenseRepository);
 

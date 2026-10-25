@@ -2,7 +2,7 @@ package com.ozcansude.practice.expense.repository;
 
 import java.util.List;
 
-public interface InMemoryRepository<T, ID> {
+public interface Repository<T, ID> {
 
     void save(T entity);
 

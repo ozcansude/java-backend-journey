@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExpenseServiceTest {
-    private ExpenseRepository expenseRepository;
+    private InMemoryExpenseRepository expenseRepository;
     private ExpenseService expenseService;
 
     @BeforeEach
     void setUp(){
-        expenseRepository = new ExpenseRepository();
+        expenseRepository = new InMemoryExpenseRepository();
         expenseService = new ExpenseService(expenseRepository);
     }
 

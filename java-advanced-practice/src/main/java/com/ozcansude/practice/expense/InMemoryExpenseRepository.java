@@ -1,13 +1,13 @@
 package com.ozcansude.practice.expense;
 
-import com.ozcansude.practice.expense.repository.InMemoryRepository;
+import com.ozcansude.practice.expense.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExpenseRepository implements InMemoryRepository<Expense,Integer>{
+public class InMemoryExpenseRepository implements Repository<Expense,Integer> {
 
     private final Map<Integer, Expense> map = new HashMap<>();
 

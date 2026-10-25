@@ -3,6 +3,7 @@ package com.ozcansude.practice.expense;
 import com.ozcansude.practice.expense.exception.ExpenseNotFoundException;
 import com.ozcansude.practice.expense.exception.InvalidCategoryException;
 import com.ozcansude.practice.expense.exception.InvalidExpenseAmountException;
+import com.ozcansude.practice.expense.repository.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,8 @@ import java.util.stream.Collectors;
 
 public class ExpenseService {
 
-    private final ExpenseRepository expenseRepository;
-    public ExpenseService(ExpenseRepository expenseRepository){
+    private final Repository<Expense,Integer> expenseRepository;
+    public ExpenseService(Repository<Expense,Integer> expenseRepository){
         this.expenseRepository = expenseRepository;
     }
 
