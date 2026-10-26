@@ -18,15 +18,32 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
         this.url = url;
         this.username = username;
     }
-
-    @Override
-    public void save(Expense entity) {
+    private int findCategoryIdNameByCategoryName(Connection connection,String categoryName){
         String sql = """
                 SELECT category_id
                 FROM categories
                 WHERE category_name = ?;
                 """;
-        String sql2 = """
+        try(
+                PreparedStatement statement = connection.prepareStatement(sql);
+        ){
+            statement.setString(1,categoryName);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getInt("category_id");
+                }
+            }
+            throw new IllegalArgumentException("Kategori bulunamadı : "+categoryName);
+        }catch (SQLException e){
+            throw new RuntimeException("Kategori bulunamadı", e);
+        }
+
+    }
+
+    @Override
+    public void save(Expense entity) {
+        String sql = """
                 INSERT INTO expenses
                  (expense_id, category_id ,expense_amount)
                  VALUES(?,?,?);
@@ -34,24 +51,17 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
         try(
                 Connection connection = DriverManager.getConnection(url,username,password);
                 PreparedStatement statement = connection.prepareStatement(sql);
-                ){
-            statement.setString(1,entity.getCategory());
-            try(ResultSet rs = statement.executeQuery()){
-                if(rs.next()){
-                    int category_id = rs.getInt("category_id");
-                    try(PreparedStatement pr = connection.prepareStatement(sql2)){
-                        pr.setInt(1,entity.getId());
-                        pr.setInt(2,category_id);
-                        pr.setInt(3,entity.getAmount());
+        ){
+           int categoryID = findCategoryIdNameByCategoryName(connection,entity.getCategory());
 
-                        pr.executeUpdate();
-                }
-                }else{
-                    throw new IllegalArgumentException("Kategori bulunamadı");
-                }
-            }
+           statement.setInt(1, entity.getId());
+           statement.setInt(2,categoryID);
+           statement.setInt(3,entity.getAmount());
+
+            statement.executeUpdate();
+
         }catch (SQLException e){
-            throw new RuntimeException("Hata oluştu." ,e);
+            throw new RuntimeException("Eklenme sırasında hata oluştu", e);
         }
     }
 
@@ -146,40 +156,26 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
 
     @Override
     public boolean update(Integer id, Expense entity) {
-        String sql1 = """
-                SELECT category_id
-                FROM categories
-                WHERE category_name = ?;
-                """;
-        String sql2 = """
+        String sql = """
                 UPDATE expenses
                 SET category_id = ? , expense_amount = ?
                 WHERE expense_id = ?
                 """;
-        try(
-                Connection connection = DriverManager.getConnection(url,username,password);
-                PreparedStatement statement = connection.prepareStatement(sql1);
-        ){
-            statement.setString(1,entity.getCategory());
-            try(ResultSet rs = statement.executeQuery()){
-                if(rs.next()){
-                    int category_id = rs.getInt("category_id");
-                    try(PreparedStatement statement1 = connection.prepareStatement(sql2)){
-                        statement1.setInt(1,category_id);
-                        statement1.setInt(2,entity.getAmount());
-                        statement1.setInt(3, id);
+        try (
+                Connection connection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            int categoryId = findCategoryIdNameByCategoryName(connection,entity.getCategory());
+            statement.setInt(1,categoryId);
+            statement.setInt(2,entity.getAmount());
+            statement.setInt(3,id);
 
-                        int affectedRows = statement1.executeUpdate();
-                        return affectedRows > 0;
-                    }
-                }else{
-                    throw new IllegalArgumentException("Kategori bulunamadı" + entity.getCategory());
-                }
-            }
-        }catch(SQLException e){
-            throw new RuntimeException("Hata oluştu",e);
+            int affectedRows = statement.executeUpdate();
+
+            return affectedRows > 0;
+        }catch (SQLException e){
+            throw new RuntimeException("Hata oluştu ",e);
         }
-
     }
 
 
