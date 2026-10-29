@@ -2,10 +2,8 @@ package com.ozcansude.practice.expense;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.ozcansude.practice.expense.exception.InvalidExpenseAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 public class JdbcExpenseRepositoryTest {
     private final String url = "jdbc:postgresql://localhost:5432/expense_db";
@@ -64,7 +62,7 @@ public class JdbcExpenseRepositoryTest {
     }
     @Test
     void shouldNotSaveExpenseWhenAmountNegative(){
-        Expense expense = new Expense(25,"Eğlence",0);
+        Expense expense = new Expense(25,"Eğlence",-100);
         RuntimeException exception = assertThrows(
             RuntimeException.class,
                 () -> expenseRepository.save(expense)
@@ -87,7 +85,7 @@ public class JdbcExpenseRepositoryTest {
         boolean updated=expenseRepository.update(expense1.getId(),expense2);
         Expense updatedValue =  expenseRepository.findById(25);
 
-        assertNotNull(expenseRepository.findById(25));
+        assertNotNull(updatedValue);
         assertEquals(25, updatedValue.getId());
         assertEquals("Market",updatedValue.getCategory());
         assertEquals(15000,updatedValue.getAmount());
@@ -125,14 +123,16 @@ public class JdbcExpenseRepositoryTest {
 
         assertNotNull(expenseRepository.findById(25));
 
-        expenseRepository.deleteById(25);
+        boolean isDeleted = expenseRepository.deleteById(25);
+
+        assertTrue(isDeleted);
 
         assertNull(expenseRepository.findById(25));
     }
 
     @Test
     void shouldReturnFalseWhenExpenseDoesNotExist(){
-        assertFalse(expenseRepository.deleteById(99)); // olmayan expense'i silmeye çalıştım
+        assertFalse(expenseRepository.deleteById(99));
     }
 
     @Test
@@ -152,6 +152,7 @@ public class JdbcExpenseRepositoryTest {
 
     @Test
     void shouldNotFindExpense(){
+        expenseRepository.deleteById(99);
         Expense expense = expenseRepository.findById(99);
 
         assertNull(expense);
