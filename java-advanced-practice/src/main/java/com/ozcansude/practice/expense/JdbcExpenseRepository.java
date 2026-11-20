@@ -1,6 +1,5 @@
 package com.ozcansude.practice.expense;
 
-import com.ozcansude.practice.expense.exception.ExpenseNotFoundException;
 import com.ozcansude.practice.expense.repository.Repository;
 
 import java.sql.*;
@@ -78,7 +77,7 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
                 WHERE e.expense_id = ?
                 """;
         try(
-                Connection connection = DriverManager.getConnection(url,username, password);
+                Connection connection =DriverManager.getConnection(url,username,password);
                 PreparedStatement statement = connection.prepareStatement(sql)
                 ){
             statement.setInt(1, id);
@@ -162,7 +161,7 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
                 WHERE expense_id = ?
                 """;
         try (
-                Connection connection = DriverManager.getConnection(url, username, password);
+                Connection connection = DriverManager.getConnection(url,username,password);
                 PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             int categoryId = findCategoryIdNameByCategoryName(connection,entity.getCategory());

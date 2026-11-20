@@ -58,6 +58,14 @@ The implementation currently uses:
 
 The repository converts category names used by the Java model into the corresponding `category_id` stored in PostgreSQL.
 
+### JDBC Database Configuration
+
+Database connection settings are centralized in the `DatabaseConfig` class to reduce code duplication.
+
+- URL, username and password are defined in `DatabaseConfig`.
+- Password is retrieved from the `DB_PASSWORD` environment variable.
+- All 10 JDBC integration tests passed after refactoring.
+
 ## Database
 
 The PostgreSQL structure contains two related tables:

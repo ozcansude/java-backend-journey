@@ -6,16 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class JdbcExpenseRepositoryTest {
-    private final String url = "jdbc:postgresql://localhost:5432/expense_db";
-    private final String username = "postgres";
-    private final String password = System.getenv("DB_PASSWORD");
 
     JdbcExpenseRepository expenseRepository;
 
     @BeforeEach
     void setUp(){
-        assertNotNull(password, "DB_PASSWORD tanımlı değil");
-        expenseRepository = new JdbcExpenseRepository(url,username,password);
+        assertNotNull(DatabaseConfig.PASSWORD, "DB_PASSWORD tanımlı değil");
+        expenseRepository = new JdbcExpenseRepository(
+                DatabaseConfig.URL,
+                DatabaseConfig.USERNAME,
+                DatabaseConfig.PASSWORD
+        );
     }
 
 
