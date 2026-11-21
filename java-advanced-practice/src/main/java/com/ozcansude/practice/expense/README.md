@@ -58,6 +58,16 @@ The implementation currently uses:
 
 The repository converts category names used by the Java model into the corresponding `category_id` stored in PostgreSQL.
 
+### JDBC Exception Handling
+
+Improved exception handling in `JdbcExpenseRepository`.
+
+- Added `DuplicateExpenseException` for duplicate expense IDs.
+- Added `ExpenseNotFoundException` for missing expenses during update and delete operations.
+- Used `InvalidCategoryException` for invalid categories.
+- Updated JDBC integration tests to verify exception behavior.
+- All 12 integration tests passed.
+
 ### JDBC Database Configuration
 
 Database connection settings are centralized in the `DatabaseConfig` class to reduce code duplication.

@@ -1,5 +1,8 @@
 package com.ozcansude.practice.expense;
 
+import com.ozcansude.practice.expense.exception.DuplicateExpenseException;
+import com.ozcansude.practice.expense.exception.ExpenseNotFoundException;
+import com.ozcansude.practice.expense.exception.InvalidCategoryException;
 import com.ozcansude.practice.expense.repository.Repository;
 
 import java.sql.*;
@@ -33,9 +36,11 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
                     return resultSet.getInt("category_id");
                 }
             }
-            throw new IllegalArgumentException("Kategori bulunamadı : "+categoryName);
+            throw new InvalidCategoryException("Kategori bulunamadı : "+categoryName);
         }catch (SQLException e){
-            throw new RuntimeException("Kategori bulunamadı", e);
+            throw new RuntimeException(
+                    "Kategori sorgulanırken veritabanı hatası oluştu.", e
+            );
         }
 
     }
@@ -60,6 +65,9 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
             statement.executeUpdate();
 
         }catch (SQLException e){
+            if("23505".equals(e.getSQLState())){
+                throw new DuplicateExpenseException(entity.getId() + " ID'li harcama mevcut.", e);
+            }
             throw new RuntimeException("Eklenme sırasında hata oluştu", e);
         }
     }
@@ -143,10 +151,16 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
                 Connection connection = DriverManager.getConnection(url,username,password);
                 PreparedStatement statement = connection.prepareStatement(sql);
         ){
+
             statement.setInt(1,id);
 
             int affecedRows = statement.executeUpdate();
-            return affecedRows > 0;
+
+            if(affecedRows == 0){
+                throw new ExpenseNotFoundException(id + " ID'li expense bulunamadı.");
+            }
+
+            return true;
 
         }catch(SQLException e){
             throw new RuntimeException("Hata oluştu",e);
@@ -170,8 +184,11 @@ public class JdbcExpenseRepository implements Repository<Expense, Integer> {
             statement.setInt(3,id);
 
             int affectedRows = statement.executeUpdate();
+            if(affectedRows == 0){
+                throw new ExpenseNotFoundException(id + " ID'li harcama bulunamadı.");
+            }
 
-            return affectedRows > 0;
+            return true;
         }catch (SQLException e){
             throw new RuntimeException("Hata oluştu ",e);
         }
