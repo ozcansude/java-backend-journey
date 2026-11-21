@@ -1,4 +1,3 @@
-package java.com.expense;
 
 import java.util.HashMap;
 
@@ -6,7 +5,7 @@ import java.util.HashMap;
 public class TwoSum {
 
     public static void bruteForce(int[] array, int target) {
-        for(int i=0; i<array.length; i++){ // İç içe iki döngü olduğundan timw comlexity O(n^2)'dir.
+        for(int i=0; i<array.length; i++){ // İç içe iki döngü olduğundan time comlexity O(n^2)'dir.
             for(int j = i+1; j<array.length; j++){
                 if(array[i] + array[j] == target){
                     System.out.println(i + " and "+j +". indices");
@@ -22,7 +21,7 @@ public class TwoSum {
             int needed = target - current; // ihtiyacım olan sayı listede var mı varsa onu yazdırıcam yoksa onu ekleyeceğim.
 
             if(map.containsKey(needed)){
-                System.out.println(map.get(needed) + " and " + i); // O(1)
+                System.out.println(map.get(needed) + " and " + i+". indices"); // O(1)
             }else{
                 map.put(current,i); // map.put... O(1)
             }
@@ -32,7 +31,7 @@ public class TwoSum {
     }
 
     public static void main(String[] args){
-        int[] array= new int[]{12,15,17,20,25,35,65};
+        int[] array= new int[]{12,15,17,20,25,35,38,65};
         int target = 50;
 
         bruteForce(array,target);
