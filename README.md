@@ -1,36 +1,64 @@
 # Java Backend Journey
 
-This repository contains my Java, Spring Boot, PostgreSQL and algorithm exceptionpractice during my backend learning journey.
+This repository documents my journey of learning Java backend development through practical examples, projects and algorithm exercises.
 
 ## Contents
 
 ### Java Basics
 
-Basic Java syntax, methods, classes, arrays, strings and object-oriented programming examples.
+- Java syntax and methods
+- Object-oriented programming (OOP)
+- Arrays and strings
+- Collections
+
+### Advanced Java
+
+- Generics
+- Stream API and Lambda Expressions
+- Exception Handling
+- Repository Pattern
+- JDBC
+- Unit Testing with JUnit
+
+### PostgreSQL
+
+- Database design
+- SQL queries
+- Joins and constraints
+- Database normalization
+- Java database integration with JDBC
 
 ### LeetCode Practice
 
-Algorithm problems solved with Java.
+Algorithm and data structure problems solved using Java.
 
-Current topics:
-
-- String problems
-- Math problems
-- Linked list problems
+- Strings
+- Arrays
+- Math
+- Linked Lists
 
 ### Spring Boot
 
-Backend development exceptionpractice with Spring Boot.
+Currently learning backend development with Spring Boot.
 
-Planned topics:
+- Dependency Injection
+- Spring Configuration
+- REST APIs
+- Controller-Service-Repository architecture
+- DTOs
+- Spring Data JPA
+- Validation and Exception Handling
 
-- REST API
-- Controller-Service-Repository structure
-- DTO usage
-- PostgreSQL connection
-- Validation
-- Error handling
+## Technologies & Tools
+
+- Java
+- Spring Boot
+- PostgreSQL
+- Maven
+- JUnit
+- Git & GitHub
+- IntelliJ IDEA
 
 ## Goal
 
-My goal is to improve my Java backend development skills step by step and keep my learning progress organized.
+My goal is to become a backend developer by building practical projects, improving my problem-solving skills and learning backend development best practices step by step.
