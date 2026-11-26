@@ -21,4 +21,12 @@ public class MessageController {
     public String hello(){
         return messageService.getMessage();
     }
+    @GetMapping("/hello/{name}")
+    public String sayHello(String name){
+        return messageService.getPersonalMessage(name);
+    }
+    @GetMapping("/greet")
+    public String greet(String name){
+        return messageService.getGreeting(name);
+    }
 }
