@@ -9,12 +9,13 @@ public class FrequencyCounter {
         HashMap<Integer,Integer> integerMap = new HashMap<>();
 
         for(int i = 0; i < array.length; i++){
-            if(!integerMap.containsKey(array[i])){
-                integerMap.put(array[i], 1);
-            }else{
-                int currentCount = integerMap.get(array[i]);
-                integerMap.put(array[i], currentCount+1);
-            }
+//            if(!integerMap.containsKey(array[i])){
+//                integerMap.put(array[i], 1);
+//            }else{
+//                int currentCount = integerMap.get(array[i]);
+//                integerMap.put(array[i], currentCount+1);
+//            }
+            integerMap.put(array[i], integerMap.getOrDefault(array[i],0) +1);
 
         }
         integerMap.forEach((key,value) -> {
@@ -30,5 +31,11 @@ public class FrequencyCounter {
             }
         }
         System.out.println("Most frequently repeated number : "+mostFrequent+"\nFrequency: "+maxCount);
+        for(int i = 0; i < array.length; i++){
+            if(integerMap.get(array[i]) == 1){
+                System.out.println("First Non-Repeated Number : "+ array[i]);
+                break;
+            }
+        }
     }
 }
