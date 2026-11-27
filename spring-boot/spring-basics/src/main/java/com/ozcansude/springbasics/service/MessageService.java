@@ -1,9 +1,6 @@
 package com.ozcansude.springbasics.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Service
 public class MessageService {
@@ -12,11 +9,16 @@ public class MessageService {
         return "Spring Boot is running";
     }
 
-    public String getPersonalMessage(@PathVariable("name") String name){
+    public String getPersonalMessage(String name){
         return "Hello "+name+"!";
     }
-    public String getGreeting(@RequestParam("name") String name){
+    public String getGreeting(String name){
         return "Welcome "+ name;
     }
-
+    public String toUppercase(String text){
+        return text.toUpperCase();
+    }
+    public int getLength(String text){
+        return text.length();
+    }
 }
